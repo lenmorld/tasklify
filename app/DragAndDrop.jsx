@@ -16,6 +16,9 @@ class DragAndDrop extends React.Component {
 		event.preventDefault(); // default is open as link
 		const data = event.dataTransfer.getData("text");
 		console.log(`Dropping: ${data}`);
+		// default HTML DnD is moving the element
+		// move to drop area
+		event.target.appendChild(document.querySelector(`#${data}`));
 	};
 
 	render() {
@@ -31,7 +34,7 @@ class DragAndDrop extends React.Component {
 				/>
 
 				{/* DRAG THESE */}
-				{[1, 2, 3, 4].map(item => (
+				{["k1", "k2", "k3", "k4"].map(item => (
 					<div draggable="true" id={item} key={item} onDragStart={this.onDragStart}>
 						{item}
 					</div>
