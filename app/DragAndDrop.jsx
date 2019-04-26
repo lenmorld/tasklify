@@ -33,12 +33,18 @@ class DragAndDrop extends React.Component {
 					style={{ border: "1px solid blue", width: "300px", height: "300px" }}
 				/>
 
-				{/* DRAG THESE */}
-				{["k1", "k2", "k3", "k4"].map(item => (
-					<div draggable="true" id={item} key={item} onDragStart={this.onDragStart}>
-						{item}
-					</div>
-				))}
+				<div
+					onDragOver={this.onDragOver}
+					onDrop={this.onDrop}
+					style={{ border: "1px solid blue", width: "300px", height: "300px" }}
+				>
+					{/* DRAG THESE */}
+					{["k1", "k2", "k3", "k4"].map(item => (
+						<div draggable="true" id={item} key={item} onDragStart={this.onDragStart}>
+							{item}
+						</div>
+					))}
+				</div>
 			</div>
 		);
 	}
