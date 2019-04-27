@@ -9,7 +9,8 @@ class App extends React.Component {
 	render() {
 		return (
 			<div>
-				<Board />
+				<Board name="Regulate" tasks={["t1", "t2", "t3"]} />
+				<Board name="Effectuate" tasks={["tt1", "tt2", "tt3"]} />
 			</div>
 		);
 	}

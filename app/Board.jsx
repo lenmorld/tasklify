@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 
 import Task from "./Task";
+import { withDropTarget } from "./DragAndDrop";
 
 const style = {
 	grid: {
@@ -12,17 +13,20 @@ const style = {
 
 class Board extends Component {
 	render() {
+		const { name, tasks } = this.props;
+
 		return (
-			<div style={style.grid}>
-				<Task id={1} />
-				<Task id={2} />
-				<Task id={3} />
-				<Task id={4} />
-				<Task id={5} />
-				<Task id={6} />
+			<div style={{ border: "5px solid blue", width: "100%", height: "300px" }}>
+				<h2>{name}</h2>
+				<div style={style.grid}>
+					{tasks.map(task => (
+						<Task key={task} id={task} />
+					))}
+				</div>
 			</div>
 		);
 	}
 }
 
-export default Board;
+// export default Board;
+export default withDropTarget(Board);
