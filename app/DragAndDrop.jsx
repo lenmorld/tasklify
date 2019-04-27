@@ -2,12 +2,16 @@ import React from "react";
 
 /**
  * props needed that must be passed by parent component
- * - id : <Task id={1}>
+ * - id
+ * 	- functions both as a prop for the HoC and as a uniquer HTML element id
+ * 	- e.g. <Task id={1}>
+ *
  */
 
 export const withDragSource = Component => {
 	class DragSource extends React.Component {
 		onDragStart = event => {
+			// debugger;
 			// get id of dragged element
 			console.log(`Dragging: ${event.target.id}`);
 			event.dataTransfer.setData("text", event.target.id);
@@ -15,10 +19,9 @@ export const withDragSource = Component => {
 
 		render() {
 			const { id } = this.props;
-
 			return (
 				<div draggable="true" id={id} onDragStart={this.onDragStart}>
-					<Component />
+					<Component {...this.props} />
 				</div>
 			);
 		}
@@ -27,13 +30,14 @@ export const withDragSource = Component => {
 	return DragSource;
 };
 
-export const withDragAndDrop = Component => {
+export const withDropTarget = Component => {
 	class DropTarget extends React.Component {
 		onDragOver = event => {
 			event.preventDefault(); // default does not allow drop
 		};
 
 		onDrop = event => {
+			debugger;
 			event.preventDefault(); // default is open as link
 			const data = event.dataTransfer.getData("text");
 			console.log(`Dropping: ${data}`);
@@ -43,15 +47,9 @@ export const withDragAndDrop = Component => {
 		};
 
 		render() {
-			// TODO: implement passed props, or make it an HOC
-
 			return (
-				<div
-					onDragOver={this.onDragOver}
-					onDrop={this.onDrop}
-					style={{ border: "1px solid blue", width: "300px", height: "300px" }}
-				>
-					<Component />
+				<div onDragOver={this.onDragOver} onDrop={this.onDrop}>
+					<Component {...this.props} />
 				</div>
 			);
 		}
