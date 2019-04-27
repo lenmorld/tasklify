@@ -66,4 +66,5 @@ class Task extends Component {
 	}
 }
 
-export default Task;
+// export default Task;
+export default withDragSource(Task);
