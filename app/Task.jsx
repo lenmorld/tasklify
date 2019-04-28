@@ -18,8 +18,8 @@ const styles = {
 		padding: "5px",
 		// maxWidth: '300px',
 		...baseStyles.flexColumn,
-		height: "150px",
-		width: "300px"
+		height: "100px",
+		width: "200px"
 	},
 	name: {
 		fontSize: "1.5rem"
@@ -47,6 +47,9 @@ const data = {
 class Task extends Component {
 	render() {
 		const task = data;
+
+		// from withDragSource
+		// const { itemDraggedId } = this.props;
 
 		return (
 			<div style={styles.card}>
