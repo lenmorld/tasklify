@@ -10,24 +10,19 @@ import React from "react";
 
 export const withDragSource = Component => {
 	class DragSource extends React.Component {
-		onDragStart = (event, sourceBoardId) => {
+		onDragStart = event => {
 			// get id of dragged element
-			const itemDrag = {
-				item: event.target.id,
-				container: sourceBoardId
-			};
-			console.log(`Dragging: ${JSON.stringify(itemDrag)}`);
-			event.dataTransfer.setData("text", JSON.stringify(itemDrag));
+			console.log(`Dragging: ${event.target.id}`);
+			event.dataTransfer.setData("text", event.target.id);
+
+			// from Board
+			this.props.onItemLeave(event.target.id);
 		};
 
 		render() {
-			const { id, boardId } = this.props;
+			const { id } = this.props;
 			return (
-				<div
-					draggable="true"
-					id={id}
-					onDragStart={event => this.onDragStart(event, boardId)}
-				>
+				<div draggable="true" id={id} onDragStart={this.onDragStart}>
 					<Component {...this.props} />
 				</div>
 			);
@@ -47,28 +42,31 @@ export const withDropTarget = Component => {
 			event.preventDefault(); // default does not allow drop
 		};
 
-		onDrop = event => {
+		onDrop = (event, boardId) => {
 			event.preventDefault(); // default is open as link
-			const itemDropped = JSON.parse(event.dataTransfer.getData("text"));
-			console.log(
-				`Dropping: ${itemDropped.item} from ${itemDropped.container} to ${
-					this.props.boardId
-				}`
-			);
+			const itemId = event.dataTransfer.getData("text");
+			console.log(`Dropping: ${itemId}`);
 			// default HTML DnD is moving the element
 			// move to drop area
 			// event.target.appendChild(document.querySelector(`#${data}`));
 
-			this.props.itemTransfer(
-				itemDropped.item,
-				itemDropped.container,
-				this.props.boardId
-			);
+			// THIS ONLY WORKS IF
+			//  this.props.onItemLeave(event.target.id);
+			// is commented out in withDragSource
+			// this.props.itemReceive(itemId, this.props.boardId);
+			this.props.itemReceive(itemId, boardId);
+
+			// TODO: how to modify state of the user component while here
+			// or alternatively just put all drag and drop logic in there
+			// if hard to make it reusable
 		};
 
 		render() {
 			return (
-				<div onDragOver={this.onDragOver} onDrop={this.onDrop}>
+				<div
+					onDragOver={this.onDragOver}
+					onDrop={event => this.onDrop(event, this.props.boardId)}
+				>
 					<Component {...this.props} />
 				</div>
 			);

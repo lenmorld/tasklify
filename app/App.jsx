@@ -13,16 +13,28 @@ class App extends React.Component {
 		}
 	};
 
-	itemTransfer = (itemId, sourceBoardId, destBoardId) => {
-		// concat is immutable
-		const destBoard = this.state.tasks[destBoardId].concat(itemId);
-		const sourceBoard = this.state.tasks[sourceBoardId].filter(t => t !== itemId);
+	itemLeave = (itemId, boardId) => {
+		debugger;
+		let tasks = this.state.tasks[boardId].filter(t => t !== itemId);
+
 		let newState = {
 			...this.state.tasks,
-			[destBoardId]: destBoard,
-			[sourceBoardId]: sourceBoard
+			[boardId]: tasks
 		};
 
+		this.setState({
+			tasks: newState
+		});
+	};
+
+	itemReceive = (itemId, boardId) => {
+		// concat is immutable
+		const tasks = this.state.tasks[boardId].concat(itemId);
+		let newState = {
+			...this.state.tasks,
+			[boardId]: tasks
+		};
+		debugger;
 		this.setState({
 			tasks: newState
 		});
@@ -35,13 +47,15 @@ class App extends React.Component {
 					name="Regulate"
 					tasks={this.state.tasks.b1}
 					boardId="b1"
-					itemTransfer={this.itemTransfer}
+					itemLeave={this.itemLeave}
+					itemReceive={this.itemReceive}
 				/>
 				<Board
 					name="Effectuate"
 					tasks={this.state.tasks.b2}
 					boardId="b2"
-					itemTransfer={this.itemTransfer}
+					itemLeave={this.itemLeave}
+					itemReceive={this.itemReceive}
 				/>
 			</div>
 		);
