@@ -12,32 +12,14 @@ const style = {
 };
 
 class Board extends Component {
-	state = {
-		itemDraggedId: null
-		// TODO: set the task in state
-	};
-
-	onItemLeaveBoard = itemDraggedId => {
-		this.setState({
-			itemDraggedId: itemDraggedId
-		});
-	};
-
 	render() {
 		// itemDroppedId from withDropTarget
-		const { name, tasks, itemDroppedId } = this.props;
+		const { name, tasks, boardId } = this.props;
 
-		let filtered = tasks;
-		// remove item leaving from tasks, if any
-		// debugger;
-		if (this.state.itemDraggedId) {
-			filtered = filtered.filter(t => t !== this.state.itemDraggedId);
-		}
-
-		// add itemDroppedId to items
-		if (itemDroppedId) {
-			tasks.push(itemDroppedId);
-		}
+		// // add itemDroppedId to items
+		// if (itemDroppedId) {
+		// 	itemReceive(itemDroppedId, boardId);
+		// }
 
 		console.log(name, ": ", tasks);
 
@@ -46,7 +28,7 @@ class Board extends Component {
 				<h2>{name}</h2>
 				<div style={style.grid}>
 					{tasks.map(task => (
-						<Task key={task} id={task} onItemLeaveContainer={this.onItemLeaveBoard} />
+						<Task key={task} id={task} boardId={boardId} />
 					))}
 				</div>
 			</div>

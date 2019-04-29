@@ -48,9 +48,6 @@ class Task extends Component {
 	render() {
 		const task = data;
 
-		// from withDragSource
-		// const { itemDraggedId } = this.props;
-
 		return (
 			<div style={styles.card}>
 				<div style={styles.name}>{task.name}</div>
