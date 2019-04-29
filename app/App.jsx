@@ -34,13 +34,13 @@ class App extends React.Component {
 				<Board
 					name="Regulate"
 					tasks={this.state.tasks.b1}
-					boardId="b1"
+					containerId="b1"
 					itemTransfer={this.itemTransfer}
 				/>
 				<Board
 					name="Effectuate"
 					tasks={this.state.tasks.b2}
-					boardId="b2"
+					containerId="b2"
 					itemTransfer={this.itemTransfer}
 				/>
 			</div>

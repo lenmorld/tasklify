@@ -13,13 +13,7 @@ const style = {
 
 class Board extends Component {
 	render() {
-		// itemDroppedId from withDropTarget
-		const { name, tasks, boardId } = this.props;
-
-		// // add itemDroppedId to items
-		// if (itemDroppedId) {
-		// 	itemReceive(itemDroppedId, boardId);
-		// }
+		const { name, tasks, containerId } = this.props;
 
 		console.log(name, ": ", tasks);
 
@@ -28,7 +22,7 @@ class Board extends Component {
 				<h2>{name}</h2>
 				<div style={style.grid}>
 					{tasks.map(task => (
-						<Task key={task} id={task} boardId={boardId} />
+						<Task key={task} id={task} containerId={containerId} />
 					))}
 				</div>
 			</div>

@@ -6,6 +6,8 @@ import React from "react";
  * 	- functions both as a prop for the HoC and as a uniquer HTML element id
  * 	- e.g. <Task id={1}>
  *
+ * - containerId
+ * 	- source container id
  */
 
 export const withDragSource = Component => {
@@ -21,12 +23,12 @@ export const withDragSource = Component => {
 		};
 
 		render() {
-			const { id, boardId } = this.props;
+			const { id, containerId } = this.props;
 			return (
 				<div
 					draggable="true"
 					id={id}
-					onDragStart={event => this.onDragStart(event, boardId)}
+					onDragStart={event => this.onDragStart(event, containerId)}
 				>
 					<Component {...this.props} />
 				</div>
@@ -38,8 +40,13 @@ export const withDragSource = Component => {
 };
 
 /**
+ * props needed:
  *
- * items ids
+ * containerId
+ * 	- destination container id
+ *
+ * itemTransfer(itemId, sourceContainerId, destContainerId)
+ *
  */
 export const withDropTarget = Component => {
 	class DropTarget extends React.Component {
@@ -52,7 +59,7 @@ export const withDropTarget = Component => {
 			const itemDropped = JSON.parse(event.dataTransfer.getData("text"));
 			console.log(
 				`Dropping: ${itemDropped.item} from ${itemDropped.container} to ${
-					this.props.boardId
+					this.props.containerId
 				}`
 			);
 			// default HTML DnD is moving the element
@@ -62,7 +69,7 @@ export const withDropTarget = Component => {
 			this.props.itemTransfer(
 				itemDropped.item,
 				itemDropped.container,
-				this.props.boardId
+				this.props.containerId
 			);
 		};
 
