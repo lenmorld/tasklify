@@ -18,7 +18,9 @@ const styles = {
 
 class Board extends Component {
 	render() {
-		const { name, tasks, containerId } = this.props;
+		// const { name, tasks, containerId } = this.props;
+		const { board, tasks } = this.props;
+		const { name, id } = board;
 
 		console.log(name, ": ", tasks);
 
@@ -27,7 +29,7 @@ class Board extends Component {
 				<h2>{name}</h2>
 				<div style={styles.grid}>
 					{tasks.map(task => (
-						<Task key={task} id={task} containerId={containerId} />
+						<Task key={task} id={task} containerId={id} />
 					))}
 				</div>
 			</div>
