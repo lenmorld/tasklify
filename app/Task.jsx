@@ -2,38 +2,11 @@ import React, { Component } from "react";
 
 import { withDragSource } from "./DragAndDrop";
 
-const baseStyles = {
-	flexColumn: {
-		display: "flex",
-		flexDirection: "column",
-		alignItems: "flex-start",
-		justifyContent: "space-between"
-	}
-};
+import taskStyles from "./styles";
+const styles = taskStyles;
 
-const styles = {
-	card: {
-		border: "1px solid gray",
-		borderRadius: "5px",
-		padding: "5px",
-		// maxWidth: '300px',
-		...baseStyles.flexColumn,
-		height: "100px",
-		width: "200px"
-	},
-	name: {
-		fontSize: "1.5rem"
-	},
-	tag: {
-		backgroundColor: "#001122",
-		color: "white",
-		// border: '1px solid blue',
-		display: "inline-block",
-		padding: "5px",
-		borderRadius: "5px",
-		margin: "0 5px"
-	},
-	image: {}
+const preview = text => {
+	return text.substring(0, 60) + "...";
 };
 
 const data = {
@@ -41,7 +14,10 @@ const data = {
 	name: "Do the design",
 	tags: [{ id: "t1", name: "react" }, { id: "t2", name: "js" }],
 	board: "web",
-	image: "https://dummyimage.com/50x50/111/bbb"
+	previewText:
+		"some content yada yade yado yadi yado some content yada yade yado yadi yado some content yada yade yado yadi yado some content yada yade yado yadi yado",
+	// image: "https://dummyimage.com/25x25/111/bbb",
+	image: "https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50"
 };
 
 class Task extends Component {
@@ -50,11 +26,14 @@ class Task extends Component {
 
 		return (
 			<div style={styles.card}>
-				<div style={styles.name}>{task.name}</div>
-				<div style={styles.image}>
-					<img src={task.image} alt="avatar" />
+				<div style={styles.nameCOntainer}>
+					<div style={styles.name}>{task.name}</div>
 				</div>
-				<div>
+				<div style={styles.content}>{preview(task.previewText)}</div>
+				<div style={styles.avatarContainer}>
+					<img style={styles.avatarImage} src={task.image} alt="avatar" />
+				</div>
+				<div style={styles.tagsContainer}>
 					{task.tags.map(t => (
 						<div key={t.id} style={styles.tag}>
 							{t.name}

@@ -18,7 +18,7 @@ class Board extends Component {
 		console.log(name, ": ", tasks);
 
 		return (
-			<div style={{ border: "5px solid blue" }}>
+			<div style={{ border: "1px solid gray" }}>
 				<h2>{name}</h2>
 				<div style={style.grid}>
 					{tasks.map(task => (
