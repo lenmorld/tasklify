@@ -1,6 +1,7 @@
 import React from "react";
 
 import Board from "./Board";
+import Panel from "./Panel";
 
 // import data from "./data";
 // console.log(data);
@@ -40,31 +41,36 @@ class App extends React.Component {
 
 	render() {
 		return (
-			<div style={styles.grid}>
-				<Board
-					name="Regulate"
-					tasks={this.state.tasks.b1}
-					containerId="b1"
-					itemTransfer={this.itemTransfer}
-				/>
-				<Board
-					name="Debate"
-					tasks={this.state.tasks.b2}
-					containerId="b2"
-					itemTransfer={this.itemTransfer}
-				/>
-				<Board
-					name="Automate"
-					tasks={this.state.tasks.b3}
-					containerId="b3"
-					itemTransfer={this.itemTransfer}
-				/>
-				<Board
-					name="Effectuate"
-					tasks={this.state.tasks.b4}
-					containerId="b4"
-					itemTransfer={this.itemTransfer}
-				/>
+			<div>
+				<div>
+					<Panel />
+				</div>
+				<div style={styles.grid}>
+					<Board
+						name="Regulate"
+						tasks={this.state.tasks.b1}
+						containerId="b1"
+						itemTransfer={this.itemTransfer}
+					/>
+					<Board
+						name="Debate"
+						tasks={this.state.tasks.b2}
+						containerId="b2"
+						itemTransfer={this.itemTransfer}
+					/>
+					<Board
+						name="Automate"
+						tasks={this.state.tasks.b3}
+						containerId="b3"
+						itemTransfer={this.itemTransfer}
+					/>
+					<Board
+						name="Effectuate"
+						tasks={this.state.tasks.b4}
+						containerId="b4"
+						itemTransfer={this.itemTransfer}
+					/>
+				</div>
 			</div>
 		);
 	}

@@ -2,8 +2,7 @@ import React, { Component } from "react";
 
 import { withDragSource } from "./DragAndDrop";
 
-import taskStyles from "./styles";
-const styles = taskStyles;
+import styles from "./styles";
 
 const preview = text => {
 	return text.substring(0, 60) + "...";
