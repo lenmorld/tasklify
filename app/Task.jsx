@@ -17,7 +17,8 @@ const data = {
 	previewText:
 		"some content yada yade yado yadi yado some content yada yade yado yadi yado some content yada yade yado yadi yado some content yada yade yado yadi yado",
 	// image: "https://dummyimage.com/25x25/111/bbb",
-	image: "https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50"
+	image: "https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50",
+	estimate: 0.5
 };
 
 class Task extends Component {
@@ -39,6 +40,9 @@ class Task extends Component {
 							{t.name}
 						</div>
 					))}
+				</div>
+				<div style={styles.estimateContainer}>
+					<div style={styles.estimate}>{data.estimate}</div>
 				</div>
 			</div>
 		);

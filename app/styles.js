@@ -56,6 +56,18 @@ const taskStyles = {
 		borderRadius: '50%',	//circle
 		height: '25px',
 		width: '25px',
+	},
+	estimateContainer: {
+		position: 'absolute',
+		bottom: '5px',
+		right: '5px',
+	},
+	estimate: {
+		fontSize: '0.75rem',
+		borderRadius: '2px',
+		border: '1px solid darkgray',
+		backgroundColor: 'lightgray',
+		padding: '1px',
 	}
 };
 
