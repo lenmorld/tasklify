@@ -11,15 +11,17 @@ const baseStyles = {
 		display: "flex",
 		flexDirection: "row",
 		alignItems: "center",
-		justifyContent: "flex-start",
+		justifyContent: "space-between",
 	},
 };
 
 const styles = {
 
 	panel: {
+		mainContainer: {
+			// width: "100%",	// no need for this if body: 100%
+		},
 		main: {
-			width: "100%",
 			height: "50px",
 			backgroundColor: colors.primaryBackground,
 			color: colors.contrastText,

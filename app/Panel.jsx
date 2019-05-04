@@ -16,6 +16,9 @@ class Panel extends React.Component {
 						<i class="fas fa-file-alt" />
 					</div>
 				</div>
+				<div style={panel.user}>
+					<i class="fas fa-user" />
+				</div>
 			</div>
 		);
 	}

@@ -41,10 +41,8 @@ class App extends React.Component {
 
 	render() {
 		return (
-			<div>
-				<div>
-					<Panel />
-				</div>
+			<div style={styles.mainContainer}>
+				<Panel />
 				<div style={styles.grid}>
 					<Board
 						name="Regulate"
