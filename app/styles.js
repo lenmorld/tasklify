@@ -1,13 +1,38 @@
+import colors from "./colors";
+
 const baseStyles = {
 	flexColumn: {
 		display: "flex",
 		flexDirection: "column",
 		alignItems: "flex-start",
 		justifyContent: "space-between"
-	}
+	},
+	flexRow: {
+		display: "flex",
+		flexDirection: "row",
+		alignItems: "center",
+		justifyContent: "flex-start",
+	},
 };
 
-const taskStyles = {
+const styles = {
+
+	panel: {
+		main: {
+			width: "100%",
+			height: "50px",
+			backgroundColor: colors.primaryBackground,
+			color: colors.contrastText,
+			padding: "20px",
+			fontSize: "2rem",
+			...baseStyles.flexRow,
+		},
+		options: {
+			...baseStyles.flexRow,
+			justifyContent: 'center'
+		},
+	},
+
 	card: {
 		position: "relative",
 		border: "1px solid gray",
@@ -39,7 +64,7 @@ const taskStyles = {
 	},
 	tag: {
 		fontSize: "0.75rem",
-		backgroundColor: "blue",
+		backgroundColor: colors.primaryBackground,
 		color: "white",
 		// border: '1px solid blue',
 		display: "inline-block",
@@ -71,4 +96,4 @@ const taskStyles = {
 	}
 };
 
-export default taskStyles;
+export default styles;
