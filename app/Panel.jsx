@@ -8,7 +8,14 @@ class Panel extends React.Component {
 		return (
 			<div style={panel.main}>
 				<div>Tasklify</div>
-				<div styles={panel.options}>asdas</div>
+				<div style={panel.options}>
+					<div style={panel.option}>
+						<i class="fas fa-list-alt" />
+					</div>
+					<div style={panel.option}>
+						<i class="fas fa-file-alt" />
+					</div>
+				</div>
 			</div>
 		);
 	}

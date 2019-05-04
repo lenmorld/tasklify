@@ -29,8 +29,13 @@ const styles = {
 		},
 		options: {
 			...baseStyles.flexRow,
-			justifyContent: 'center'
+			marginLeft: '2rem',
+			marginRight: '2rem',
 		},
+		option: {
+			marginLeft: '1rem',
+			marginRight: '1rem',
+		}
 	},
 
 	card: {
