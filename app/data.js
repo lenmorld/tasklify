@@ -19,7 +19,7 @@ var data = {
 	],
 	tasks: [
 		{
-			id: 1,
+			id: "t1",
 			board: "b1",
 			name: "Do the design",
 			tags: [{ id: "t1", name: "react" }, { id: "t2", name: "js" }],
@@ -30,9 +30,9 @@ var data = {
 			estimate: 0.5
 		},
 		{
-			id: 2,
+			id: "t2",
 			board: "b2",
-			name: "Do the design",
+			name: "Data store",
 			tags: [{ id: "t1", name: "react" }, { id: "t2", name: "js" }],
 			previewText:
 				"some content yada yade yado yadi yado some content yada yade yado yadi yado some content yada yade yado yadi yado some content yada yade yado yadi yado",
@@ -41,9 +41,9 @@ var data = {
 			estimate: 0.5
 		},
 		{
-			id: 3,
+			id: "t3",
 			board: "b3",
-			name: "Do the design",
+			name: "Detail view",
 			tags: [{ id: "t1", name: "react" }, { id: "t2", name: "js" }],
 			previewText:
 				"some content yada yade yado yadi yado some content yada yade yado yadi yado some content yada yade yado yadi yado some content yada yade yado yadi yado",
@@ -52,9 +52,9 @@ var data = {
 			estimate: 0.5
 		},
 		{
-			id: 4,
+			id: "t4",
 			board: "b4",
-			name: "Do the design",
+			name: "Add and edit - fullstack",
 			tags: [{ id: "t1", name: "react" }, { id: "t2", name: "js" }],
 			previewText:
 				"some content yada yade yado yadi yado some content yada yade yado yadi yado some content yada yade yado yadi yado some content yada yade yado yadi yado",
