@@ -21,6 +21,7 @@
 	},
 	"homepage": "https://github.com/lenmorld/react_workshop#readme",
 	"dependencies": {
+		"diskdb": "^0.1.17",
 		"express": "^4.16.3",
 		"react": "^16.5.2",
 		"react-dom": "^16.5.2"

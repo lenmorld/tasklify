@@ -1,6 +1,10 @@
 // import express and init server using express()
 const express = require("express");
+const db = require('diskdb');
 const server = express();
+
+db.connect('./data', ['tasks']);
+console.log(db.tasks.find());
 
 const port = 4000;
 
