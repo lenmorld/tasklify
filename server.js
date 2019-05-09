@@ -1,14 +1,29 @@
-// import express and init server using express()
 const express = require("express");
 const db = require('diskdb');
 const server = express();
 
-const data = require("./data");
-// console.log(data);
+const port = 4000;
 
 db.connect('./data', ['tasks', 'boards']);
 console.log("tasks:", db.tasks.find().length);
 console.log("boards:", db.boards.find().length);
+
+
+//  ==== BACKDOOR to DB ===========
+/* 
+	this backdoor is only used to
+	modify the database schema easily
+
+	steps:
+	1. change structure in data.js which is more readable
+	2. reset [collection_name].json to an empty []
+	3. this code will reset diskdb into contents of data.js
+	alternative:
+	- maybe it's ok to modify [collection_name].json directly?
+	-> check if it corrupts db
+ */
+const data = require("./data");
+// console.log(data);
 
 // load data.js to database once
 if (!db.tasks.find().length) {
@@ -19,7 +34,7 @@ if (!db.boards.find().length) {
 	db.boards.save(data.boards);
 }
 
-const port = 4000;
+//  ==== end of BACKDOOR to DB =====
 
 server.use(express.static("public"));
 
@@ -42,6 +57,5 @@ server.get("/api/boards", (req, res) => {
 });
 
 server.listen(port, function () {
-	// Callback function
 	console.log("Running server at " + port);
 });
