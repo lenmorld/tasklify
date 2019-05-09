@@ -4,11 +4,11 @@ const db = require('diskdb');
 const server = express();
 
 const data = require("./data");
-console.log(data);
+// console.log(data);
 
 db.connect('./data', ['tasks', 'boards']);
-console.log("tasks:", db.tasks.find());
-console.log("boards:", db.boards.find());
+console.log("tasks:", db.tasks.find().length);
+console.log("boards:", db.boards.find().length);
 
 // load data.js to database once
 if (!db.tasks.find().length) {
@@ -18,9 +18,6 @@ if (!db.tasks.find().length) {
 if (!db.boards.find().length) {
 	db.boards.save(data.boards);
 }
-
-
-
 
 const port = 4000;
 
@@ -35,9 +32,13 @@ server.get("/api/json", (req, res) => {
 	res.json({ name: "Lenny" });
 });
 
+// ========== API route handlers =======
+server.get("/api/tasks", (req, res) => {
+	res.json(db.tasks.find());
+});
 
-server.get("/api/items", () => {
-
+server.get("/api/boards", (req, res) => {
+	res.json(db.boards.find());
 });
 
 server.listen(port, function () {

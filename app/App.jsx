@@ -1,10 +1,11 @@
 import React from "react";
+import axios from "axios";
 
 import Board from "./Board";
 import Panel from "./Panel";
 
-import data from "./data";
-console.log(data);
+// import data from "./data";
+// console.log(data);
 
 const styles = {
 	grid: {
@@ -33,10 +34,30 @@ const styles = {
 // };
 
 class App extends React.Component {
+	// state = {
+	// boards: data.boards,
+	// tasks: data.tasks // TODO revise this to match data strucutre needed
+	// };
+
+	// state from backend
 	state = {
-		boards: data.boards,
-		tasks: data.tasks // TODO revise this to match data strucutre needed
+		boards: [],
+		tasks: []
 	};
+
+	componentDidMount() {
+		// fetch boards then fetch tasks
+		axios.get("/api/boards").then(res => {
+			const boards = res.data;
+
+			axios.get("/api/tasks").then(_res => {
+				this.setState({
+					boards: boards,
+					tasks: _res.data
+				});
+			});
+		});
+	}
 
 	// state = data.boards;
 	// state = {
