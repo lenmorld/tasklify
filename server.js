@@ -1,5 +1,7 @@
 const express = require("express");
 const db = require('diskdb');
+const body_parser = require('body-parser');
+
 const server = express();
 
 const port = 4000;
@@ -36,6 +38,11 @@ if (!db.boards.find().length) {
 
 //  ==== end of BACKDOOR to DB =====
 
+
+// ==== SERVER middlewares =====
+// parse JSON (application/json content-type)
+server.use(body_parser.json());
+
 server.use(express.static("public"));
 
 server.get("/", function (req, res) {
@@ -52,8 +59,47 @@ server.get("/api/tasks", (req, res) => {
 	res.json(db.tasks.find());
 });
 
+server.get("/api/tasks/:id", (req, res) => {
+	res.json(db.tasks.find({ id: req.params.id }));
+});
+
 server.get("/api/boards", (req, res) => {
 	res.json(db.boards.find());
+});
+
+// patch
+server.patch("/api/tasks/:id", (req, res) => {
+	const itemId = req.params.id;
+	const updates = req.body;
+
+	console.log(`Patching item: ${itemId} with ${JSON.stringify(updates)} `);
+
+	// TODO: on mongodb, use $set instead
+	const item = db.tasks.findOne({ id: itemId });
+	const newItem = {
+		...item,
+		...updates
+	};
+
+	db.tasks.update({ id: itemId }, newItem);
+
+	console.log(newItem);
+
+	// return updated item
+	res.json(newItem);
+});
+
+// full task update
+server.put("/api/tasks/:id", (req, res) => {
+	const itemId = req.params.id;
+	const item = req.body;
+
+	console.log(`Editing item: ${itemId} with ${item} `);
+
+	db.tasks.update({ id: itemId }, item);
+
+	// return updated item
+	res.json(JSON.stringify(item));
 });
 
 server.listen(port, function () {
