@@ -34,27 +34,12 @@ class App extends React.Component {
 
 	// replace destBoardId of target item
 	itemTransfer = (itemId, sourceBoardId, destBoardId) => {
-		// FRONTEND ONLY way
-		// const newTasks = this.state.tasks.map(t =>
-		// 	t.id === itemId ? { ...t, board: destBoardId } : t
-		// );
+		const newTasks = this.state.tasks.map(t =>
+			t.id === itemId ? { ...t, board: destBoardId } : t
+		);
 
-		// this.setState({
-		// 	tasks: newTasks
-		// });
-
-		// update boardId of task
-		// const item = this.state.tasks.find(t => t.id === itemId);
-		// item.board = destBoardId;
-
-		// send update request to backend
-		// patch is enough for just the boardId update
-		axios.patch(`/api/tasks/${itemId}`, { board: destBoardId }).then(res => {
-			const updatedTask = res.data;
-			const newTasksWithoutUpdated = this.state.tasks.filter(t => t.id !== itemId);
-			this.setState({
-				tasks: [...newTasksWithoutUpdated, updatedTask]
-			});
+		this.setState({
+			tasks: newTasks
 		});
 	};
 
