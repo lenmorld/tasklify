@@ -3,8 +3,24 @@ const express = require("express");
 const db = require('diskdb');
 const server = express();
 
-db.connect('./data', ['tasks']);
-console.log(db.tasks.find());
+const data = require("./data");
+console.log(data);
+
+db.connect('./data', ['tasks', 'boards']);
+console.log("tasks:", db.tasks.find());
+console.log("boards:", db.boards.find());
+
+// load data.js to database once
+if (!db.tasks.find().length) {
+	db.tasks.save(data.tasks);
+}
+
+if (!db.boards.find().length) {
+	db.boards.save(data.boards);
+}
+
+
+
 
 const port = 4000;
 
