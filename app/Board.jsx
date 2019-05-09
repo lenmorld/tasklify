@@ -3,11 +3,16 @@ import React, { Component } from "react";
 import Task from "./Task";
 import { withDropTarget } from "./DragAndDrop";
 
-const style = {
+const styles = {
 	grid: {
 		display: "grid",
 		gridTemplateColumns: "auto auto",
 		gridGap: "10px"
+	},
+	container: {
+		padding: "10px",
+		border: "1px solid gray",
+		backgroundColor: ""
 	}
 };
 
@@ -18,9 +23,9 @@ class Board extends Component {
 		console.log(name, ": ", tasks);
 
 		return (
-			<div style={{ border: "5px solid blue" }}>
+			<div style={styles.container}>
 				<h2>{name}</h2>
-				<div style={style.grid}>
+				<div style={styles.grid}>
 					{tasks.map(task => (
 						<Task key={task} id={task} containerId={containerId} />
 					))}
