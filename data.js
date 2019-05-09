@@ -1,4 +1,4 @@
-var data = {
+const data = {
 	boards: [
 		{
 			id: "b1",
@@ -72,4 +72,5 @@ var data = {
 	b4: ["a1", "a2", "a3"]
 */
 
-export default data;
+// export default data;
+module.exports = data;

@@ -22,7 +22,8 @@ const data = {
 
 class Task extends Component {
 	render() {
-		const task = data;
+		// const task = data;
+		const { task } = this.props;
 
 		return (
 			<div style={styles.card}>
