@@ -67,6 +67,16 @@ server.get("/api/boards", (req, res) => {
 	res.json(db.boards.find());
 });
 
+// create one
+server.post("/api/tasks", (req, res) => {
+	const item = req.body;
+	console.log('Adding new task: ', item);
+	// add new item to db
+	db.tasks.save(item);
+	// return updated list
+	res.json(db.tasks.find());
+});
+
 // patch
 server.patch("/api/tasks/:id", (req, res) => {
 	const itemId = req.params.id;
