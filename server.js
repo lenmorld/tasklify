@@ -77,6 +77,16 @@ server.post("/api/tasks", (req, res) => {
 	res.json(db.tasks.find());
 });
 
+// remove one
+server.delete("/api/tasks/:id", (req, res) => {
+	const itemId = req.params.id;
+	console.log("Delete item with id: ", itemId);
+
+	db.tasks.remove({ id: itemId });
+
+	res.json(db.tasks.find());
+});
+
 // patch
 server.patch("/api/tasks/:id", (req, res) => {
 	const itemId = req.params.id;
