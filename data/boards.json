@@ -1,1 +1,17 @@
-[{"id":"b4","name":"Effectuate","_id":"c1d39e07119d46dabab87e6065ef3791"},{"id":"b3","name":"Automate","_id":"c91cdbced9984bbcba5a9c4f10823278"},{"id":"b2","name":"Debate","_id":"2e44e5dff643480d8ea061f65aef3d5f"},{"id":"b1","name":"Regulate","_id":"0736342eedd848938d7f222a583f8d28"}]
+[{
+	"id": "b4",
+	"name": "Effectuate",
+	"_id": "c1d39e07119d46dabab87e6065ef3791"
+}, {
+	"id": "b3",
+	"name": "Automate",
+	"_id": "c91cdbced9984bbcba5a9c4f10823278"
+}, {
+	"id": "b2",
+	"name": "Debate",
+	"_id": "2e44e5dff643480d8ea061f65aef3d5f"
+}, {
+	"id": "b1",
+	"name": "Regulate",
+	"_id": "0736342eedd848938d7f222a583f8d28"
+}]
