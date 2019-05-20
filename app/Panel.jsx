@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "@reach/router";
 
 import styles from "./styles";
 const { panel } = styles;
@@ -7,7 +8,9 @@ class Panel extends React.Component {
 	render() {
 		return (
 			<div style={panel.main}>
-				<div>Tasklify</div>
+				<Link to="/">
+					<div>Tasklify</div>
+				</Link>
 				<div style={panel.options}>
 					<div style={panel.option}>
 						<i class="fas fa-list-alt" />

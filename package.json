@@ -26,6 +26,7 @@
 	},
 	"homepage": "https://github.com/lenmorld/react_workshop#readme",
 	"dependencies": {
+		"@reach/router": "^1.2.1",
 		"axios": "^0.18.0",
 		"body-parser": "^1.19.0",
 		"diskdb": "^0.1.17",

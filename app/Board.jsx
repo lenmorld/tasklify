@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Router, Link } from "@reach/router";
 
 import Task from "./Task";
 import { withDropTarget } from "./DragAndDrop";
@@ -20,6 +21,9 @@ const styles = {
 	}
 };
 
+const Home = () => <h2>Home</h2>;
+const Team = () => <h2>Team</h2>;
+
 class Board extends Component {
 	render() {
 		// const { name, tasks, containerId } = this.props;
@@ -33,6 +37,12 @@ class Board extends Component {
 
 		return (
 			<div style={styles.container}>
+				<Link to="/">Home</Link>
+				<Link to="/team">Team</Link>
+				<Router>
+					<Home path="/" />
+					<Team path="/team/*" />
+				</Router>
 				<h2>{board.name}</h2>
 				<div style={styles.grid}>
 					{tasksInBoard.map(task => (
