@@ -52,7 +52,7 @@ const styles = {
 	},
 	nameContainer: {
 		position: 'absolute',
-		bottom: '5px',
+		top: '5px',
 		left: '5px',
 	},
 	content: {
@@ -63,6 +63,9 @@ const styles = {
 	},
 	name: {
 		fontSize: "1rem",
+		fontWeight: 'bold',
+		cursor: 'pointer',
+		color: colors.primaryText,
 	},
 	tagsContainer: {
 		position: 'absolute',

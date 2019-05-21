@@ -3,6 +3,8 @@ import axios from "axios";
 
 import Board from "./Board";
 import Panel from "./Panel";
+import Modal from "./Modal";
+import ModalContext from "./ModalContext";
 
 const styles = {
 	grid: {
@@ -13,9 +15,38 @@ const styles = {
 };
 
 class App extends React.Component {
+	// toggleModal = () => {
+	// 	this.setState({
+	// 		modal: {
+	// 			...this.state.modal,
+	// 			visible: !this.state.modal.visible
+	// 		}
+	// 	});
+	// };
+
+	setEntityInModal = _entity => {
+		// debugger;
+		this.setState({
+			modal: {
+				visible: true,
+				entity: _entity
+			}
+		});
+	};
+
 	state = {
 		boards: [],
-		tasks: []
+		tasks: [],
+		modal: {
+			visible: false,
+			// toggleModal: this.toggleModal,
+			entity: {
+				type: "task", // default
+				id: "t1",
+				mode: "edit"
+			},
+			setEntity: this.setEntityInModal
+		}
 	};
 
 	componentDidMount() {
@@ -32,6 +63,13 @@ class App extends React.Component {
 		});
 	}
 
+	// TODO: put in store
+	getItemByTypeAndId = (type, id) => {
+		if (type === "task") {
+			return this.state.tasks.find(t => t.id === id);
+		}
+	};
+
 	// replace destBoardId of target item
 	itemTransfer = (itemId, sourceBoardId, destBoardId) => {
 		// send update request to backend
@@ -45,20 +83,37 @@ class App extends React.Component {
 		});
 	};
 
+	renderModal = () => {
+		// debugger;
+		const entity = this.state.modal.entity;
+
+		const item = this.getItemByTypeAndId(entity.type, entity.id);
+
+		return (
+			<Modal>
+				{item.id} - {item.name}
+			</Modal>
+		);
+	};
+
 	render() {
 		return (
 			<div style={styles.mainContainer}>
-				<Panel />
-				<div style={styles.grid}>
-					{this.state.boards.map(b => (
-						<Board
-							board={b}
-							tasks={this.state.tasks}
-							itemTransfer={this.itemTransfer}
-							containerId={b.id} // needed for withDropTarget
-						/>
-					))}
-				</div>
+				<ModalContext.Provider value={this.state.modal}>
+					<Panel />
+					<div style={styles.grid}>
+						{this.state.boards.map(b => (
+							<Board
+								board={b}
+								tasks={this.state.tasks}
+								itemTransfer={this.itemTransfer}
+								containerId={b.id} // needed for withDropTarget
+							/>
+						))}
+					</div>
+					{/* Modal */}
+					{this.state.modal.visible ? this.renderModal() : ""}
+				</ModalContext.Provider>
 			</div>
 		);
 	}
