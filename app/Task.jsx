@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 
 import { withDragSource } from "./DragAndDrop";
+import ModalContext from "./ModalContext";
 
 import styles from "./styles";
 
@@ -26,25 +27,33 @@ class Task extends Component {
 		const { task } = this.props;
 
 		return (
-			<div style={styles.card}>
-				<div style={styles.nameCOntainer}>
-					<div style={styles.name}>{task.name}</div>
-				</div>
-				<div style={styles.content}>{preview(task.previewText)}</div>
-				<div style={styles.avatarContainer}>
-					<img style={styles.avatarImage} src={task.image} alt="avatar" />
-				</div>
-				<div style={styles.tagsContainer}>
-					{task.tags.map(t => (
-						<div key={t.id} style={styles.tag}>
-							{t.name}
+			<ModalContext.Consumer>
+				{({ visible, toggleModal }) => {
+					console.log(visible);
+
+					return (
+						<div style={styles.card}>
+							<div style={styles.nameContainer} onClick={toggleModal}>
+								<div style={styles.name}>{task.name}</div>
+							</div>
+							<div style={styles.content}>{preview(task.previewText)}</div>
+							<div style={styles.avatarContainer}>
+								<img style={styles.avatarImage} src={task.image} alt="avatar" />
+							</div>
+							<div style={styles.tagsContainer}>
+								{task.tags.map(t => (
+									<div key={t.id} style={styles.tag}>
+										{t.name}
+									</div>
+								))}
+							</div>
+							<div style={styles.estimateContainer}>
+								<div style={styles.estimate}>{data.estimate}</div>
+							</div>
 						</div>
-					))}
-				</div>
-				<div style={styles.estimateContainer}>
-					<div style={styles.estimate}>{data.estimate}</div>
-				</div>
-			</div>
+					);
+				}}
+			</ModalContext.Consumer>
 		);
 	}
 }

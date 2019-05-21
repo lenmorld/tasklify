@@ -52,7 +52,7 @@ const styles = {
 	},
 	nameContainer: {
 		position: 'absolute',
-		bottom: '5px',
+		top: '5px',
 		left: '5px',
 	},
 	content: {

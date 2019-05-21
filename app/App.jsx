@@ -3,6 +3,8 @@ import axios from "axios";
 
 import Board from "./Board";
 import Panel from "./Panel";
+import Modal from "./Modal";
+import ModalContext from "./ModalContext";
 
 const styles = {
 	grid: {
@@ -13,9 +15,22 @@ const styles = {
 };
 
 class App extends React.Component {
+	toggleModal = () => {
+		this.setState({
+			modal: {
+				...this.state.modal,
+				visible: !this.state.modal.visible
+			}
+		});
+	};
+
 	state = {
 		boards: [],
-		tasks: []
+		tasks: [],
+		modal: {
+			visible: false,
+			toggleModal: this.toggleModal
+		}
 	};
 
 	componentDidMount() {
@@ -48,17 +63,21 @@ class App extends React.Component {
 	render() {
 		return (
 			<div style={styles.mainContainer}>
-				<Panel />
-				<div style={styles.grid}>
-					{this.state.boards.map(b => (
-						<Board
-							board={b}
-							tasks={this.state.tasks}
-							itemTransfer={this.itemTransfer}
-							containerId={b.id} // needed for withDropTarget
-						/>
-					))}
-				</div>
+				<ModalContext.Provider value={this.state.modal}>
+					<Panel />
+					<div style={styles.grid}>
+						{this.state.boards.map(b => (
+							<Board
+								board={b}
+								tasks={this.state.tasks}
+								itemTransfer={this.itemTransfer}
+								containerId={b.id} // needed for withDropTarget
+							/>
+						))}
+					</div>
+					{/* Modal */}
+					{this.state.modal.visible ? <Modal>haha</Modal> : ""}
+				</ModalContext.Provider>
 			</div>
 		);
 	}
