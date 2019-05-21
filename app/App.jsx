@@ -15,11 +15,21 @@ const styles = {
 };
 
 class App extends React.Component {
-	toggleModal = () => {
+	// toggleModal = () => {
+	// 	this.setState({
+	// 		modal: {
+	// 			...this.state.modal,
+	// 			visible: !this.state.modal.visible
+	// 		}
+	// 	});
+	// };
+
+	setEntityInModal = _entity => {
+		// debugger;
 		this.setState({
 			modal: {
-				...this.state.modal,
-				visible: !this.state.modal.visible
+				visible: true,
+				entity: _entity
 			}
 		});
 	};
@@ -29,7 +39,13 @@ class App extends React.Component {
 		tasks: [],
 		modal: {
 			visible: false,
-			toggleModal: this.toggleModal
+			// toggleModal: this.toggleModal,
+			entity: {
+				type: "task", // default
+				id: "t1",
+				mode: "edit"
+			},
+			setEntity: this.setEntityInModal
 		}
 	};
 
@@ -47,6 +63,13 @@ class App extends React.Component {
 		});
 	}
 
+	// TODO: put in store
+	getItemByTypeAndId = (type, id) => {
+		if (type === "task") {
+			return this.state.tasks.find(t => t.id === id);
+		}
+	};
+
 	// replace destBoardId of target item
 	itemTransfer = (itemId, sourceBoardId, destBoardId) => {
 		// send update request to backend
@@ -58,6 +81,19 @@ class App extends React.Component {
 				tasks: [...newTasksWithoutUpdated, updatedTask]
 			});
 		});
+	};
+
+	renderModal = () => {
+		// debugger;
+		const entity = this.state.modal.entity;
+
+		const item = this.getItemByTypeAndId(entity.type, entity.id);
+
+		return (
+			<Modal>
+				{item.id} - {item.name}
+			</Modal>
+		);
 	};
 
 	render() {
@@ -76,7 +112,7 @@ class App extends React.Component {
 						))}
 					</div>
 					{/* Modal */}
-					{/* {this.state.modal.visible ? <Modal>haha</Modal> : ""} */}
+					{this.state.modal.visible ? this.renderModal() : ""}
 				</ModalContext.Provider>
 			</div>
 		);

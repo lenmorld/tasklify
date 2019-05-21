@@ -2,7 +2,6 @@ import React, { Component } from "react";
 
 import { withDragSource } from "./DragAndDrop";
 import ModalContext from "./ModalContext";
-import Modal from "./Modal";
 
 import styles from "./styles";
 
@@ -29,12 +28,15 @@ class Task extends Component {
 
 		return (
 			<ModalContext.Consumer>
-				{({ visible, toggleModal }) => {
+				{({ visible, setEntity }) => {
 					console.log(visible);
 
 					return (
 						<div style={styles.card}>
-							<div style={styles.nameContainer} onClick={toggleModal}>
+							<div
+								style={styles.nameContainer}
+								onClick={() => setEntity({ id: task.id, type: "task", mode: "edit" })}
+							>
 								<div style={styles.name}>{task.name}</div>
 							</div>
 							<div style={styles.content}>{preview(task.previewText)}</div>
@@ -50,10 +52,6 @@ class Task extends Component {
 							</div>
 							<div style={styles.estimateContainer}>
 								<div style={styles.estimate}>{data.estimate}</div>
-							</div>
-							<div>
-								{/* Modal */}
-								{visible ? <Modal>haha</Modal> : ""}
 							</div>
 						</div>
 					);
