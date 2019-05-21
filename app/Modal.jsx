@@ -9,7 +9,25 @@
 import React from "react";
 import ReactDOM from "react-dom";
 
-const styles = {};
+const styles = {
+	outside: {
+		width: "100%",
+		height: "100%",
+		position: "absolute",
+		top: 0,
+		left: 0,
+		backgroundColor: "rgba(0,0,0, 0.5)",
+		// flex - center vertically and horizontally
+		display: "flex",
+		alignItems: "center",
+		justifyContent: "center"
+	},
+	inside: {
+		width: "50%",
+		height: "75%",
+		backgroundColor: "white"
+	}
+};
 
 // TODO: put #root in config or pass as props
 const appRoot = document.querySelector("#root");
@@ -30,10 +48,19 @@ class Modal extends React.Component {
 		appRoot.removeChild(this.modalElement);
 	}
 
+	renderPortalBody = content => (
+		<div style={styles.outside}>
+			<div style={styles.inside}>{content}</div>
+		</div>
+	);
+
 	// TODO: provide render props option as well
 
 	render() {
-		return ReactDOM.createPortal(this.props.children, this.modalElement);
+		return ReactDOM.createPortal(
+			this.renderPortalBody(this.props.children),
+			this.modalElement
+		);
 	}
 }
 

@@ -63,6 +63,9 @@ const styles = {
 	},
 	name: {
 		fontSize: "1rem",
+		fontWeight: 'bold',
+		cursor: 'pointer',
+		color: colors.primaryText,
 	},
 	tagsContainer: {
 		position: 'absolute',
