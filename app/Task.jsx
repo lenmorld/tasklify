@@ -2,6 +2,7 @@ import React, { Component } from "react";
 
 import { withDragSource } from "./DragAndDrop";
 import ModalContext from "./ModalContext";
+import Modal from "./Modal";
 
 import styles from "./styles";
 
@@ -49,6 +50,10 @@ class Task extends Component {
 							</div>
 							<div style={styles.estimateContainer}>
 								<div style={styles.estimate}>{data.estimate}</div>
+							</div>
+							<div>
+								{/* Modal */}
+								{visible ? <Modal>haha</Modal> : ""}
 							</div>
 						</div>
 					);

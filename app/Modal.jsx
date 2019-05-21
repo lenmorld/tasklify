@@ -4,6 +4,24 @@
  * <Modal>
  *     <div>...stuff</div>
  * </Modal>
+ *
+ *
+ * using ModalContext:
+ *
+ * // define this.state.modal in Context root component
+ *
+ * <ModalContext.Provider value={this.state.modal}>
+ *     ...
+ * </ModalContext.Provider>
+ *
+ * <ModalContext.Consumer>
+ * 	{({ visible, toggleModal }) => {
+ *          visible ? <Modal>haha</Modal> : ""
+ *          ...
+ *          onClick = () => toggleModal
+ *     } }
+ * </ModalContext.Consumer>
+ *
  */
 
 import React from "react";

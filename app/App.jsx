@@ -76,7 +76,7 @@ class App extends React.Component {
 						))}
 					</div>
 					{/* Modal */}
-					{this.state.modal.visible ? <Modal>haha</Modal> : ""}
+					{/* {this.state.modal.visible ? <Modal>haha</Modal> : ""} */}
 				</ModalContext.Provider>
 			</div>
 		);
