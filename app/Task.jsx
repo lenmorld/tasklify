@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 
 import { withDragSource } from "./DragAndDrop";
-import ModalContext from "./ModalContext";
 
 import styles from "./styles";
 
@@ -23,7 +22,6 @@ const data = {
 
 class Task extends Component {
 	render() {
-		// const task = data;
 		const { task, setEntity } = this.props;
 
 		return (
@@ -53,5 +51,4 @@ class Task extends Component {
 	}
 }
 
-// export default Task;
 export default withDragSource(Task);

@@ -22,14 +22,11 @@ const styles = {
 
 class Board extends Component {
 	render() {
-		// const { name, tasks, containerId } = this.props;
 		const { board, tasks, setEntity } = this.props;
 
 		const tasksInBoard = getTasksInBoard(board.id, tasks);
 
 		console.log(board.name, ": ", tasksInBoard);
-
-		// <Task key={task.id} id={task.id} containerId={board.id} />
 
 		return (
 			<div style={styles.container}>
@@ -50,5 +47,4 @@ class Board extends Component {
 	}
 }
 
-// export default Board;
 export default withDropTarget(Board);

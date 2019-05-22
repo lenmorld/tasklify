@@ -4,7 +4,6 @@ import axios from "axios";
 import Board from "./Board";
 import Panel from "./Panel";
 import Modal from "./Modal";
-// import ModalContext from "./ModalContext";
 
 const styles = {
 	grid: {
@@ -15,17 +14,7 @@ const styles = {
 };
 
 class App extends React.Component {
-	// toggleModal = () => {
-	// 	this.setState({
-	// 		modal: {
-	// 			...this.state.modal,
-	// 			visible: !this.state.modal.visible
-	// 		}
-	// 	});
-	// };
-
 	setEntityInModal = _entity => {
-		// debugger;
 		this.setState({
 			modalEntity: _entity,
 			modalVisible: true
@@ -42,19 +31,6 @@ class App extends React.Component {
 			mode: "edit"
 		}
 	};
-
-	/*
-		modal: {
-			visible: false,
-			// toggleModal: this.toggleModal,
-			entity: {
-				type: "task", // default
-				id: "t1",
-				mode: "edit"
-			},
-			setEntity: this.setEntityInModal
-		}
-	*/
 
 	componentDidMount() {
 		// fetch boards then fetch tasks
@@ -102,8 +78,6 @@ class App extends React.Component {
 	};
 
 	renderModal = () => {
-		// debugger;
-		// const entity = this.state.modal.entity;
 		const entity = this.state.modalEntity;
 
 		const item = this.getItemByTypeAndId(entity.type, entity.id);
@@ -118,7 +92,6 @@ class App extends React.Component {
 	render() {
 		return (
 			<div style={styles.mainContainer}>
-				{/* <ModalContext.Provider value={this.state.modal}> */}
 				<Panel />
 				<div style={styles.grid}>
 					{this.state.boards.map(b => (
@@ -133,7 +106,6 @@ class App extends React.Component {
 				</div>
 				{/* Modal */}
 				{this.state.modalVisible ? this.renderModal() : ""}
-				{/* </ModalContext.Provider> */}
 			</div>
 		);
 	}
