@@ -23,7 +23,7 @@ const styles = {
 class Board extends Component {
 	render() {
 		// const { name, tasks, containerId } = this.props;
-		const { board, tasks } = this.props;
+		const { board, tasks, setEntity } = this.props;
 
 		const tasksInBoard = getTasksInBoard(board.id, tasks);
 
@@ -36,7 +36,13 @@ class Board extends Component {
 				<h2>{board.name}</h2>
 				<div style={styles.grid}>
 					{tasksInBoard.map(task => (
-						<Task key={task.id} task={task} id={task.id} containerId={board.id} />
+						<Task
+							key={task.id}
+							task={task}
+							id={task.id}
+							containerId={board.id}
+							setEntity={setEntity}
+						/>
 					))}
 				</div>
 			</div>

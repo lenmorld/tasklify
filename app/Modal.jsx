@@ -1,7 +1,7 @@
 /**
  * usage:
  *
- * <Modal>
+ * <Modal onExit={}>
  *     <div>...stuff</div>
  * </Modal>
  *
@@ -43,32 +43,44 @@ const styles = {
 	inside: {
 		width: "50%",
 		height: "75%",
-		backgroundColor: "white"
+		backgroundColor: "white",
+		position: "relative"
+	},
+	closeButton: {
+		top: "5px",
+		right: "5px",
+		position: "absolute"
 	}
 };
 
 // TODO: put #root in config or pass as props
-const appRoot = document.querySelector("#root");
+// const appRoot = document.querySelector("#root");
 
 // A reusable Modal component based on React Portal
 class Modal extends React.Component {
 	constructor(props) {
 		super(props);
 
-		this.modalElement = document.createElement("div");
+		// this.modalElement = document.createElement("div");
+		this.modalElement = document.querySelector("#modal");
 	}
 
-	componentDidMount() {
-		appRoot.appendChild(this.modalElement);
-	}
+	// componentDidMount() {
+	// 	appRoot.appendChild(this.modalElement);
+	// }
 
-	componentWillUnmount() {
-		appRoot.removeChild(this.modalElement);
-	}
+	// componentWillUnmount() {
+	// 	appRoot.removeChild(this.modalElement);
+	// }
 
 	renderPortalBody = content => (
 		<div style={styles.outside}>
-			<div style={styles.inside}>{content}</div>
+			<div style={styles.inside}>
+				<div style={styles.closeButton}>
+					<button onClick={this.props.onExit}>❌</button>
+				</div>
+				<div>{content}</div>
+			</div>
 		</div>
 	);
 

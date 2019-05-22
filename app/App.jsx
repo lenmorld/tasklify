@@ -4,7 +4,7 @@ import axios from "axios";
 import Board from "./Board";
 import Panel from "./Panel";
 import Modal from "./Modal";
-import ModalContext from "./ModalContext";
+// import ModalContext from "./ModalContext";
 
 const styles = {
 	grid: {
@@ -27,16 +27,23 @@ class App extends React.Component {
 	setEntityInModal = _entity => {
 		// debugger;
 		this.setState({
-			modal: {
-				visible: true,
-				entity: _entity
-			}
+			modalEntity: _entity,
+			modalVisible: true
 		});
 	};
 
 	state = {
 		boards: [],
 		tasks: [],
+		modalVisible: false,
+		modalEntity: {
+			type: "task", // default
+			id: "t1",
+			mode: "edit"
+		}
+	};
+
+	/*
 		modal: {
 			visible: false,
 			// toggleModal: this.toggleModal,
@@ -47,7 +54,7 @@ class App extends React.Component {
 			},
 			setEntity: this.setEntityInModal
 		}
-	};
+	*/
 
 	componentDidMount() {
 		// fetch boards then fetch tasks
@@ -61,6 +68,11 @@ class App extends React.Component {
 				});
 			});
 		});
+	}
+
+	componentWillUpdate(newProps, newState) {
+		console.log("New props: ", newProps);
+		console.log("New state: ", newState);
 	}
 
 	// TODO: put in store
@@ -83,14 +95,21 @@ class App extends React.Component {
 		});
 	};
 
+	hideModal = () => {
+		this.setState({
+			modalVisible: false
+		});
+	};
+
 	renderModal = () => {
 		// debugger;
-		const entity = this.state.modal.entity;
+		// const entity = this.state.modal.entity;
+		const entity = this.state.modalEntity;
 
 		const item = this.getItemByTypeAndId(entity.type, entity.id);
 
 		return (
-			<Modal>
+			<Modal onExit={this.hideModal}>
 				{item.id} - {item.name}
 			</Modal>
 		);
@@ -99,21 +118,22 @@ class App extends React.Component {
 	render() {
 		return (
 			<div style={styles.mainContainer}>
-				<ModalContext.Provider value={this.state.modal}>
-					<Panel />
-					<div style={styles.grid}>
-						{this.state.boards.map(b => (
-							<Board
-								board={b}
-								tasks={this.state.tasks}
-								itemTransfer={this.itemTransfer}
-								containerId={b.id} // needed for withDropTarget
-							/>
-						))}
-					</div>
-					{/* Modal */}
-					{this.state.modal.visible ? this.renderModal() : ""}
-				</ModalContext.Provider>
+				{/* <ModalContext.Provider value={this.state.modal}> */}
+				<Panel />
+				<div style={styles.grid}>
+					{this.state.boards.map(b => (
+						<Board
+							board={b}
+							tasks={this.state.tasks}
+							itemTransfer={this.itemTransfer}
+							containerId={b.id} // needed for withDropTarget
+							setEntity={this.setEntityInModal}
+						/>
+					))}
+				</div>
+				{/* Modal */}
+				{this.state.modalVisible ? this.renderModal() : ""}
+				{/* </ModalContext.Provider> */}
 			</div>
 		);
 	}

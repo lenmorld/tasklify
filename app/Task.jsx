@@ -24,39 +24,31 @@ const data = {
 class Task extends Component {
 	render() {
 		// const task = data;
-		const { task } = this.props;
+		const { task, setEntity } = this.props;
 
 		return (
-			<ModalContext.Consumer>
-				{({ visible, setEntity }) => {
-					console.log(visible);
-
-					return (
-						<div style={styles.card}>
-							<div
-								style={styles.nameContainer}
-								onClick={() => setEntity({ id: task.id, type: "task", mode: "edit" })}
-							>
-								<div style={styles.name}>{task.name}</div>
-							</div>
-							<div style={styles.content}>{preview(task.previewText)}</div>
-							<div style={styles.avatarContainer}>
-								<img style={styles.avatarImage} src={task.image} alt="avatar" />
-							</div>
-							<div style={styles.tagsContainer}>
-								{task.tags.map(t => (
-									<div key={t.id} style={styles.tag}>
-										{t.name}
-									</div>
-								))}
-							</div>
-							<div style={styles.estimateContainer}>
-								<div style={styles.estimate}>{data.estimate}</div>
-							</div>
+			<div style={styles.card}>
+				<div
+					style={styles.nameContainer}
+					onClick={() => setEntity({ id: task.id, type: "task", mode: "edit" })}
+				>
+					<div style={styles.name}>{task.name}</div>
+				</div>
+				<div style={styles.content}>{preview(task.previewText)}</div>
+				<div style={styles.avatarContainer}>
+					<img style={styles.avatarImage} src={task.image} alt="avatar" />
+				</div>
+				<div style={styles.tagsContainer}>
+					{task.tags.map(t => (
+						<div key={t.id} style={styles.tag}>
+							{t.name}
 						</div>
-					);
-				}}
-			</ModalContext.Consumer>
+					))}
+				</div>
+				<div style={styles.estimateContainer}>
+					<div style={styles.estimate}>{data.estimate}</div>
+				</div>
+			</div>
 		);
 	}
 }
