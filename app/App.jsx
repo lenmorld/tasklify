@@ -15,14 +15,16 @@ const styles = {
 };
 
 class App extends React.Component {
-	// toggleModal = () => {
-	// 	this.setState({
-	// 		modal: {
-	// 			...this.state.modal,
-	// 			visible: !this.state.modal.visible
-	// 		}
-	// 	});
-	// };
+	toggleModal = () => {
+		this.setState({
+			modal: {
+				...this.state.modal,
+				visible: !this.state.modal.visible
+			}
+		});
+	};
+
+	// TODO: figure out what is causing extra re-render even in a simple toggle of visible in Context
 
 	setEntityInModal = _entity => {
 		// debugger;
@@ -39,7 +41,7 @@ class App extends React.Component {
 		tasks: [],
 		modal: {
 			visible: false,
-			// toggleModal: this.toggleModal,
+			toggleModal: this.toggleModal,
 			entity: {
 				type: "task", // default
 				id: "t1",
@@ -112,7 +114,7 @@ class App extends React.Component {
 						))}
 					</div>
 					{/* Modal */}
-					{this.state.modal.visible ? this.renderModal() : ""}
+					{/* {this.state.modal.visible ? this.renderModal() : ""} */}
 				</ModalContext.Provider>
 			</div>
 		);
