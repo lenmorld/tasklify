@@ -16,8 +16,8 @@ const styles = {
 class App extends React.Component {
 	setEntityInModal = _entity => {
 		this.setState({
-			modalEntity: _entity,
-			modalVisible: true
+			modalVisible: true,
+			modalEntity: _entity
 		});
 	};
 
@@ -25,11 +25,7 @@ class App extends React.Component {
 		boards: [],
 		tasks: [],
 		modalVisible: false,
-		modalEntity: {
-			type: "task", // default
-			id: "t1",
-			mode: "edit"
-		}
+		modalEntity: null
 	};
 
 	componentDidMount() {
@@ -78,14 +74,19 @@ class App extends React.Component {
 	};
 
 	renderModal = () => {
+		// debugger;
 		const entity = this.state.modalEntity;
-
-		const item = this.getItemByTypeAndId(entity.type, entity.id);
-
+		const item =
+			this.getItemByTypeAndId(entity.type, entity.id) || this.state.modalEntity;
+		// return (
+		// 	<Modal onExit={this.hideModal}>
+		// 		{item.id} - {item.name}
+		// 	</Modal>
+		// );
 		return (
-			<Modal onExit={this.hideModal}>
+			<div>
 				{item.id} - {item.name}
-			</Modal>
+			</div>
 		);
 	};
 
@@ -104,11 +105,22 @@ class App extends React.Component {
 						/>
 					))}
 				</div>
+				<Modal
+					render={this.renderModal}
+					visible={this.state.modalVisible}
+					hide={this.hideModal}
+				/>
 				{/* Modal */}
-				{this.state.modalVisible ? this.renderModal() : ""}
+				{/* {this.state.modalVisible ? this.renderModal() : ""} */}
 			</div>
 		);
 	}
 }
 
 export default App;
+
+/*
+				<Modal
+					render={({ visible }) => <div>{visible ? this.renderModal() : ""}</div>}
+				/>
+*/

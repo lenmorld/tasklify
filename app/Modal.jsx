@@ -58,15 +58,36 @@ const styles = {
 
 // A reusable Modal component based on React Portal
 class Modal extends React.Component {
+	// get from props
+	// static getDerivedStateFromProps(props, state) {
+	// 	return props.visible === state.visible ? null : { visible: props.visible };
+	// }
+
 	constructor(props) {
 		super(props);
+
+		// this.state = {
+		// 	visible: false
+		// };
 
 		// this.modalElement = document.createElement("div");
 		this.modalElement = document.querySelector("#modal");
 	}
 
+	// hideModal = () => {
+	// 	this.setState({
+	// 		visible: false
+	// 	});
+	// };
+
+	// showModal = () => {
+	// 	this.setState({
+	// 		visible: true
+	// 	});
+	// };
+
 	// componentDidMount() {
-	// 	appRoot.appendChild(this.modalElement);
+	// appRoot.appendChild(this.modalElement);
 	// }
 
 	// componentWillUnmount() {
@@ -77,21 +98,37 @@ class Modal extends React.Component {
 		<div style={styles.outside}>
 			<div style={styles.inside}>
 				<div style={styles.closeButton}>
-					<button onClick={this.props.onExit}>❌</button>
+					<button onClick={this.props.hide}>❌</button>
 				</div>
-				<div>{content}</div>
+				<div>{this.props.render()}</div>
+				{/* <div>{content}</div> */}
 			</div>
 		</div>
 	);
 
 	// TODO: provide render props option as well
 
+	componentDidUpdate(prevState, prevProps) {
+		debugger;
+	}
+
 	render() {
+		if (!this.props.visible) {
+			return "";
+		}
+
 		return ReactDOM.createPortal(
 			this.renderPortalBody(this.props.children),
 			this.modalElement
 		);
 	}
 }
+
+/*
+		return ReactDOM.createPortal(
+			this.renderPortalBody(this.props.children),
+			this.modalElement
+		);
+*/
 
 export default Modal;
