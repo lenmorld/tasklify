@@ -1,0 +1,3 @@
+problem
+
+rendering <Modal> inside <Task> renders 4 of them at once
