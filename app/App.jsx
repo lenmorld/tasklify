@@ -4,7 +4,6 @@ import axios from "axios";
 import Board from "./Board";
 import Panel from "./Panel";
 import Modal from "./Modal";
-import ModalContext from "./ModalContext";
 
 const styles = {
 	grid: {
@@ -15,40 +14,18 @@ const styles = {
 };
 
 class App extends React.Component {
-	toggleModal = () => {
-		this.setState({
-			modal: {
-				...this.state.modal,
-				visible: !this.state.modal.visible
-			}
-		});
-	};
-
-	// TODO: figure out what is causing extra re-render even in a simple toggle of visible in Context
-
 	setEntityInModal = _entity => {
-		// debugger;
 		this.setState({
-			modal: {
-				visible: true,
-				entity: _entity
-			}
+			modalVisible: true,
+			modalEntity: _entity
 		});
 	};
 
 	state = {
 		boards: [],
 		tasks: [],
-		modal: {
-			visible: false,
-			toggleModal: this.toggleModal,
-			entity: {
-				type: "task", // default
-				id: "t1",
-				mode: "edit"
-			},
-			setEntity: this.setEntityInModal
-		}
+		modalVisible: false,
+		modalEntity: null
 	};
 
 	componentDidMount() {
@@ -63,6 +40,11 @@ class App extends React.Component {
 				});
 			});
 		});
+	}
+
+	componentWillUpdate(newProps, newState) {
+		console.log("New props: ", newProps);
+		console.log("New state: ", newState);
 	}
 
 	// TODO: put in store
@@ -85,40 +67,55 @@ class App extends React.Component {
 		});
 	};
 
+	hideModal = () => {
+		this.setState({
+			modalVisible: false
+		});
+	};
+
 	renderModal = () => {
 		// debugger;
-		const entity = this.state.modal.entity;
-
-		const item = this.getItemByTypeAndId(entity.type, entity.id);
-
+		const entity = this.state.modalEntity;
+		const item =
+			this.getItemByTypeAndId(entity.type, entity.id) || this.state.modalEntity;
 		return (
-			<Modal>
+			<div>
 				{item.id} - {item.name}
-			</Modal>
+			</div>
 		);
 	};
 
 	render() {
 		return (
 			<div style={styles.mainContainer}>
-				<ModalContext.Provider value={this.state.modal}>
-					<Panel />
-					<div style={styles.grid}>
-						{this.state.boards.map(b => (
-							<Board
-								board={b}
-								tasks={this.state.tasks}
-								itemTransfer={this.itemTransfer}
-								containerId={b.id} // needed for withDropTarget
-							/>
-						))}
-					</div>
-					{/* Modal */}
-					{/* {this.state.modal.visible ? this.renderModal() : ""} */}
-				</ModalContext.Provider>
+				<Panel />
+				<div style={styles.grid}>
+					{this.state.boards.map(b => (
+						<Board
+							board={b}
+							tasks={this.state.tasks}
+							itemTransfer={this.itemTransfer}
+							containerId={b.id} // needed for withDropTarget
+							setEntity={this.setEntityInModal}
+						/>
+					))}
+				</div>
+				<Modal
+					render={this.renderModal}
+					visible={this.state.modalVisible}
+					hide={this.hideModal}
+				/>
+				{/* Modal */}
+				{/* {this.state.modalVisible ? this.renderModal() : ""} */}
 			</div>
 		);
 	}
 }
 
 export default App;
+
+/*
+				<Modal
+					render={({ visible }) => <div>{visible ? this.renderModal() : ""}</div>}
+				/>
+*/
