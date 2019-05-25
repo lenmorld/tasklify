@@ -109,7 +109,7 @@ class Modal extends React.Component {
 	// TODO: provide render props option as well
 
 	componentDidUpdate(prevState, prevProps) {
-		debugger;
+		// debugger;
 	}
 
 	render() {

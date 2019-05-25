@@ -78,11 +78,6 @@ class App extends React.Component {
 		const entity = this.state.modalEntity;
 		const item =
 			this.getItemByTypeAndId(entity.type, entity.id) || this.state.modalEntity;
-		// return (
-		// 	<Modal onExit={this.hideModal}>
-		// 		{item.id} - {item.name}
-		// 	</Modal>
-		// );
 		return (
 			<div>
 				{item.id} - {item.name}
