@@ -1,0 +1,12 @@
+				{({ visible, setEntity }) => {
+					console.log(visible);
+					
+								{/* Modal */}
+								{visible ? "haha" : ""}
+							</div>
+
+										<ModalContext.Consumer>
+				{({ visible, setEntity }) => {
+					console.log
+
+					() => setEntity({ id: task.id, type: "task", mode: "edit" })
