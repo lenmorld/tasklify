@@ -1,15 +1,11 @@
 /**
  * usage:
- *
  * <Modal onExit={}>
  *     <div>...stuff</div>
  * </Modal>
  *
- *
  * using ModalContext:
- *
  * // define this.state.modal in Context root component
- *
  * <ModalContext.Provider value={this.state.modal}>
  *     ...
  * </ModalContext.Provider>
@@ -21,7 +17,6 @@
  *          onClick = () => toggleModal
  *     } }
  * </ModalContext.Consumer>
- *
  */
 
 import React from "react";
@@ -53,46 +48,14 @@ const styles = {
 	}
 };
 
-// TODO: put #root in config or pass as props
-// const appRoot = document.querySelector("#root");
-
 // A reusable Modal component based on React Portal
 class Modal extends React.Component {
-	// get from props
-	// static getDerivedStateFromProps(props, state) {
-	// 	return props.visible === state.visible ? null : { visible: props.visible };
-	// }
-
 	constructor(props) {
 		super(props);
-
-		// this.state = {
-		// 	visible: false
-		// };
 
 		// this.modalElement = document.createElement("div");
 		this.modalElement = document.querySelector("#modal");
 	}
-
-	// hideModal = () => {
-	// 	this.setState({
-	// 		visible: false
-	// 	});
-	// };
-
-	// showModal = () => {
-	// 	this.setState({
-	// 		visible: true
-	// 	});
-	// };
-
-	// componentDidMount() {
-	// appRoot.appendChild(this.modalElement);
-	// }
-
-	// componentWillUnmount() {
-	// 	appRoot.removeChild(this.modalElement);
-	// }
 
 	renderPortalBody = content => (
 		<div style={styles.outside}>
@@ -106,8 +69,7 @@ class Modal extends React.Component {
 		</div>
 	);
 
-	// TODO: provide render props option as well
-
+	// TODO: investigate unneeded renders
 	componentDidUpdate(prevState, prevProps) {
 		// debugger;
 	}
@@ -123,12 +85,5 @@ class Modal extends React.Component {
 		);
 	}
 }
-
-/*
-		return ReactDOM.createPortal(
-			this.renderPortalBody(this.props.children),
-			this.modalElement
-		);
-*/
 
 export default Modal;

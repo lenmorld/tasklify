@@ -105,8 +105,6 @@ class App extends React.Component {
 					visible={this.state.modalVisible}
 					hide={this.hideModal}
 				/>
-				{/* Modal */}
-				{/* {this.state.modalVisible ? this.renderModal() : ""} */}
 			</div>
 		);
 	}
